@@ -2,6 +2,7 @@ package com.example.banking.Controller;
 
 import com.example.banking.Entity.BankingEntity;
 import com.example.banking.Service.BankingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class BankingController {
     private BankingService bankingService;
 
     @PostMapping("/CreateAccount")
-    public String addAccount(@RequestBody BankingEntity bankingEntity) {
+    public String addAccount(@Valid @RequestBody BankingEntity bankingEntity) {
         return bankingService.add(bankingEntity);
     }
 
@@ -26,17 +27,17 @@ public class BankingController {
     }
 
     @GetMapping("/search/{id}")
-    public Optional<BankingEntity> getId(@PathVariable Long id) {
+    public Optional<BankingEntity> getId(@Valid @PathVariable Long id) {
         return bankingService.getById(id);
     }
 
     @PutMapping("/update/{id}")
-    public  String updateAll(@PathVariable Long id, @RequestBody BankingEntity bankingEntity)
+    public  String updateAll(@Valid @PathVariable Long id, @RequestBody BankingEntity bankingEntity)
     {
         return bankingService.update(id,bankingEntity);
     }
     @GetMapping("/deactive/{id}")
-    public ResponseEntity<String> deact(@PathVariable Long id){
+    public ResponseEntity<String> deact(@Valid @PathVariable Long id){
         Optional<BankingEntity> deactive = bankingService.deact(id);
         return ResponseEntity.ok("Customer with ID " + id + " has been deactivated successfully.");
 
@@ -47,7 +48,7 @@ public class BankingController {
     }
 
     @PostMapping
-    public BankingEntity addCustomer(@RequestBody BankingEntity customer) {
+    public BankingEntity addCustomer(@Valid @RequestBody BankingEntity customer) {
         return bankingService.addCustomer(customer);
     }
     @GetMapping("/highincome")
@@ -55,7 +56,7 @@ public class BankingController {
         return bankingService.getHighIncomeCustomers();
     }
     @GetMapping
-    public ResponseEntity<List<BankingEntity>> getCustomers(
+    public ResponseEntity<List<BankingEntity>> getCustomers(@Valid
             @RequestParam(defaultValue = "name") String sortBy,
             @RequestParam(defaultValue = "asc") String order) {
 
