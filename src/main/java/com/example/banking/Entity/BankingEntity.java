@@ -37,8 +37,6 @@ public class BankingEntity {
     private Long income;
 
     private LocalDate dateOfBirth;
-
-
     private Long age;
 
     private boolean active = true;
