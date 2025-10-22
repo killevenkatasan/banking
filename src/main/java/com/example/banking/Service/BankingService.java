@@ -84,6 +84,7 @@ public class BankingService {
                 Sort.by(sortBy).ascending();
 
         return bankingRepository.findAll(sort);
+
     }
     }
 
