@@ -14,4 +14,5 @@ public interface BankingRepository extends JpaRepository<BankingEntity, Long> {
     @Query("SELECT b FROM BankingEntity b WHERE b.active = true")
     List<BankingEntity> findAllActiveCustomers();
     List<BankingEntity> findByIncomeGreaterThan(Long amount);
+
 }
