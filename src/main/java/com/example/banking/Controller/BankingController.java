@@ -62,5 +62,4 @@ public class BankingController {
         List<BankingEntity> customers = bankingService.getAllCustomersSorted(sortBy, order);
         return ResponseEntity.ok(customers);
     }
-    System.out.print("hii");
 }
