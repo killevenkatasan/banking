@@ -2,6 +2,7 @@ package com.example.banking.Service;
 
 import com.example.banking.Entity.BankingEntity;
 import com.example.banking.Repository.BankingRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
-
+@Data
 @Service
 public class BankingService {
     @Autowired
@@ -69,10 +70,11 @@ public class BankingService {
     public BankingEntity addCustomer(BankingEntity bankingEntity)
     {
         int age = Period.between(bankingEntity.getDateOfBirth(), LocalDate.now()).getYears();
-         bankingEntity.setAge((long) age);
+        bankingEntity.setAge((long) age);
         if (age < 18) {
-            return null;
-        }
+            throw new IllegalArgumentException("Customer must be at least 18 years old");
+
+    }
         return bankingRepository.save(bankingEntity);
     }
     public List<BankingEntity> getHighIncomeCustomers() {
@@ -84,7 +86,5 @@ public class BankingService {
                 Sort.by(sortBy).ascending();
 
         return bankingRepository.findAll(sort);
-
     }
-    }
-
+}
