@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 @Data
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/banking")
 @RestController
 public class BankingController {
